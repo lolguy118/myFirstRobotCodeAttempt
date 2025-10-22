@@ -22,14 +22,26 @@ public class Drive {
     public void differentialDrive() {
         speedAxis = kxboxController.getRawAxis(Constants.KALI_SPEED_AXIS_NUMBER) * 0.6;
         rotationAxis = kxboxController.getRawAxis(Constants.ROTATION_AXIS_NUMBER) * 0.4;
-        driverSpeed = speedAxis + rotationAxis;
-        passengerSpeed = speedAxis - rotationAxis;
 
+        setMotorOutputs(getDriverSpeed(speedAxis, rotationAxis), getPassengerSpeed(speedAxis, rotationAxis));
+    }
+
+    public double getDriverSpeed(double speed, double rotation) {
+        return speed + rotation;
+    }
+
+    public double getPassengerSpeed(double speed, double rotation) {
+        return speed - rotation;
+    }
+
+    public void setMotorOutputs(double driverSpeed, double passengerSpeed) {
         kfrontDriver.set(driverSpeed);
         kbackDriver.set(driverSpeed);
         kfrontPassenger.set(passengerSpeed);
         kbackPassenger.set(passengerSpeed);
     }
+
+    
 
 
 }
