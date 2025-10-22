@@ -3,16 +3,14 @@ package com.team271.frc2023.subystems;
 import com.ctre.phoenix6.hardware.TalonFX;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 
 public class Drive {
-    Constants constants = new Constants();
 
     // Creates TalonFX Objects
-    TalonFX kfrontDriver = new TalonFX(constants.FRONT_DRIVER_ID);
-    TalonFX kfrontPassenger = new TalonFX(constants.FRONT_PASSENGER_ID);
-    TalonFX kbackDriver = new TalonFX(constants.BACK_DRIVER_ID);
-    TalonFX kbackPassenger = new TalonFX(constants.BACK_PASSENGER_ID);
+    TalonFX kfrontDriver = new TalonFX(Constants.FRONT_DRIVER_ID);
+    TalonFX kfrontPassenger = new TalonFX(Constants.FRONT_PASSENGER_ID);
+    TalonFX kbackDriver = new TalonFX(Constants.BACK_DRIVER_ID);
+    TalonFX kbackPassenger = new TalonFX(Constants.BACK_PASSENGER_ID);
 
     Joystick kxboxController = new Joystick(0);
     double driverSpeed;
@@ -22,8 +20,15 @@ public class Drive {
 
 
     public void differentialDrive() {
-        speedAxis = kxboxController.getRawAxis(constants.KALI_SPEED_AXIS_NUMBER);
-        rotationAxis = kxboxController.getRawAxis(constants.ROTATION_AXIS_NUMBER);
+        speedAxis = kxboxController.getRawAxis(Constants.KALI_SPEED_AXIS_NUMBER) * 0.6;
+        rotationAxis = kxboxController.getRawAxis(Constants.ROTATION_AXIS_NUMBER) * 0.4;
+        driverSpeed = speedAxis + rotationAxis;
+        passengerSpeed = speedAxis - rotationAxis;
+
+        kfrontDriver.set(driverSpeed);
+        kbackDriver.set(driverSpeed);
+        kfrontPassenger.set(passengerSpeed);
+        kbackPassenger.set(passengerSpeed);
     }
 
 
