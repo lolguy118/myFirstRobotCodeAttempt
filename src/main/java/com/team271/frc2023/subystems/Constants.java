@@ -9,5 +9,8 @@ public class Constants {
     public static int JOYSTICK_PORT_NUMBER = 0;
     public static int KALI_SPEED_AXIS_NUMBER = 1;
     public static int ROTATION_AXIS_NUMBER = 0;
+
+    public static int WRIST_ID_1 = 0;
+    public static int WRIST_ID_2 = 0;
     
 }
